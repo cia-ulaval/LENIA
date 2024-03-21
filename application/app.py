@@ -1,20 +1,29 @@
 from flask import Flask, render_template, url_for
-
+from jinja2.exceptions import TemplateNotFound
 
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return 'Hello, World'
+    try:
+        return render_template('index.html')
+    except TemplateNotFound:
+        return 'Index pas encore créé :( '
 
 @app.route('/about')
 def about():
-    return 'About Us'
+    try:
+        return render_template('about.html')
+    except TemplateNotFound:
+        return 'About pas encore créé :( '
 
 @app.route('/contact')
 def contact():
-    return 'Contact Page'
+    try:
+        return render_template('contact.html')
+    except TemplateNotFound:
+        return 'Contact pas encore créé :( '
 
 if __name__ == '__main__':
     app.run(debug=True)
